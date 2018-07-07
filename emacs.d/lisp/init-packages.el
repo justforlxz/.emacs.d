@@ -33,3 +33,5 @@
   (exec-path-from-shell-initialize))
 
 (provide 'init-packages)
+
+(load-theme 'monokai 1)

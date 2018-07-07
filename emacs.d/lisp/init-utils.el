@@ -7,3 +7,10 @@
 
 
 (provide 'init-utils)
+
+(setq initial-frame-alist (quote ((fullscreen . maximized))))
+
+(add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
+
+(global-hl-line-mode 1)
+
