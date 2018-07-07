@@ -2,7 +2,13 @@
 
 (add-to-list 'load-path "~/.emacs.d/lisp/")
 
-(require 'init-packages)
+;;(require 'init-packages)
+(require 'init-utils)
+(require 'init-elpa)
+;;(require 'init-fonts)
+;;(require 'init-markdown)
+
+(provide 'init)
 
 ;; 显示行号
 (global-linum-mode 1)
