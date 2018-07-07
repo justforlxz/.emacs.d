@@ -14,6 +14,8 @@
 (global-auto-complete-mode t)
 (provide 'init)
 
+(setq make-backup-files nil)
+
 ;; 显示行号
 (global-linum-mode 1)
 
