@@ -14,3 +14,7 @@
 
 (global-hl-line-mode 1)
 
+(setq auto-mode-alist
+      (append
+       '(("\\.js\\'" . js2-mode))
+       auto-mode-alist))
