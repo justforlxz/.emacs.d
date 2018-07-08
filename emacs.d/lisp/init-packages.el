@@ -13,6 +13,9 @@
                         exec-path-from-shell
 			smartparens
 			monokai-theme
+			neotree
+			expand-region
+			iedit
 			) "Defualt packages")
 
 (setq package-selected-packages my/packages)
@@ -35,3 +38,19 @@
 (provide 'init-packages)
 
 (load-theme 'monokai 1)
+    (add-to-list 'package-archives
+                 '("melpa" . "http://melpa.org/packages/"))
+
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
+(setq hippie-expand-try-function-list '(try-expand-debbrev
+					try-expand-debbrev-all-buffers
+					try-expand-debbrev-from-kill
+					try-complete-file-name-partially
+					try-complete-file-name
+					try-expand-all-abbrevs
+					try-expand-list
+					try-expand-line
+					try-complete-lisp-symbol-partially
+					try-complete-lisp-symbol))
