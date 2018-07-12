@@ -7,7 +7,8 @@
 (require 'init-elpa)
 ;;(require 'init-fonts)
 ;;(require 'init-markdown)
-
+(require 'init-font)
+(require 'init-tab)
 (require 'go-autocomplete)
 (require 'auto-complete-config)
 (ac-config-default)

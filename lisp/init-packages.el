@@ -7,16 +7,18 @@
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 (require 'cl)
 (defvar my/packages '(
-                        company
-                        js2-mode
-                        nodejs-repl
-                        exec-path-from-shell
-			smartparens
-			monokai-theme
-			neotree
-			expand-region
-			iedit
-			) "Defualt packages")
+		      auto-complete
+		      company
+		      go-mode
+		      js2-mode
+                      nodejs-repl
+                      exec-path-from-shell
+		      smartparens
+		      monokai-theme
+		      neotree
+		      expand-region
+		      iedit
+		      ) "Defualt packages")
 
 (setq package-selected-packages my/packages)
 (defun my/packages-installed-p ()

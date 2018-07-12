@@ -28,7 +28,4 @@
 
 (global-set-key (kbd "C-=") 'er/expand-region)
 (global-set-key (kbd "M-s e") 'iedit-mode)
-
-(setq ;;theme settings
-      monokai-background "#66ccff"
- )
+(setq backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
