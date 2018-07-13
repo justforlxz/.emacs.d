@@ -9,17 +9,20 @@
 (defvar my/packages '(
                       auto-complete
                       auto-complete-c-headers
+                      dumb-jump
                       irony
 		      company
                       company-irony
 		      go-mode
                       yasnippet
+                      yasnippet-snippets
                       exec-path-from-shell
 		      smartparens
 		      monokai-theme
 		      neotree
 		      expand-region
 		      iedit
+                      use-package
 		      ) "Defualt packages")
 
 (setq package-selected-packages my/packages)

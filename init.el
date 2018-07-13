@@ -1,11 +1,15 @@
 (package-initialize)
 
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+;; This is only needed once, near the top of the file
+(eval-when-compile
+  ;; Following line is not needed if use-package.el is in ~/.emacs.d
+  (add-to-list 'load-path "~/.emacs.d/lisp/")
+  (require 'use-package))
 
 (require 'init-packages)
 (require 'init-utils)
 (require 'init-elpa)
-;;(require 'init-auto-complete)
+(require 'init-auto-complete)
 ;;(require 'init-fonts)
 ;;(require 'init-markdown)
 (require 'init-font)
@@ -14,7 +18,6 @@
 ;; start yasnippet with emacs
 (require 'yasnippet)
 
-(ac-config-default)
 (provide 'init)
 
 (setq make-backup-files nil)
@@ -54,19 +57,19 @@
 ;; 关闭启动帮助画面
 (setq inhibit-splash-screen 1)
 (custom-set-variables
- ;;custom-set-variables was added by Custom.
- ;;If you edit it by hand, you could mess it up, so be careful.
- ;;Your init file should contain only one such instance.
- ;;If there is more than one, they won't work right.
-'(package-selected-packages
-  (quote
-   (auto-complete-c-headers auto-complete-clang company-go auto-compile go-mode))))
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (auto-complete-c-headers auto-complete-clang company-go auto-compile go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-)
+ )
 
 ;; Golang
 (require 'go-mode)(add-hook 'before-save-hook 'gofmt-before-save)
