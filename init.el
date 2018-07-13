@@ -5,14 +5,16 @@
 (require 'init-packages)
 (require 'init-utils)
 (require 'init-elpa)
+;;(require 'init-auto-complete)
 ;;(require 'init-fonts)
 ;;(require 'init-markdown)
 (require 'init-font)
 (require 'init-tab)
 (require 'go-autocomplete)
-(require 'auto-complete-config)
+;; start yasnippet with emacs
+(require 'yasnippet)
+
 (ac-config-default)
-(global-auto-complete-mode t)
 (provide 'init)
 
 (setq make-backup-files nil)
@@ -43,23 +45,28 @@
 ;; 显示行号
 (global-linum-mode 1)
 
+(yas-global-mode 1)
+
+
 ;; 更改光标的样式（不能生效，解决方案见第二集）
 (setq cursor-type 'bar)
 
 ;; 关闭启动帮助画面
 (setq inhibit-splash-screen 1)
 (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (company-go auto-compile go-mode))))
+ ;;custom-set-variables was added by Custom.
+ ;;If you edit it by hand, you could mess it up, so be careful.
+ ;;Your init file should contain only one such instance.
+ ;;If there is more than one, they won't work right.
+'(package-selected-packages
+  (quote
+   (auto-complete-c-headers auto-complete-clang company-go auto-compile go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+)
 
 ;; Golang
 (require 'go-mode)(add-hook 'before-save-hook 'gofmt-before-save)
@@ -68,8 +75,19 @@
 (add-hook 'go-mode-hook '(lambda ()
   (local-set-key (kbd "C-c C-g") 'go-goto-imports)))
 (add-hook 'go-mode-hook '(lambda ()
-  (local-set-key (kbd "C-c C-f") 'gofmt)))(add-hook 'before-save-hook 'gofmt-before-save)
+(local-set-key (kbd "C-c C-f") 'gofmt)))(add-hook 'before-save-hook 'gofmt-before-save)
 (add-hook 'go-mode-hook '(lambda ()
   (local-set-key (kbd "C-c C-k") 'godoc)))
 (add-hook 'go-mode-hook 'company-mode)(add-hook 'go-mode-hook (lambda ()  (set (make-local-variable 'company-backends) '(company-go))
   (company-mode)))
+
+;; define a function which initializes auto-complete-c-headers and gets called for c/c++ hooks
+(defun my:ac-c-header-init ()
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include")
+)
+
+;; now let's call this function from c/c++ hooks
+(add-hook 'c++-mode-hook 'my:ac-c-header-init)
+(add-hook 'c-mode-hook 'my:ac-c-header-init)

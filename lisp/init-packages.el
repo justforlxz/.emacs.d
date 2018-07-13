@@ -7,11 +7,13 @@
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 (require 'cl)
 (defvar my/packages '(
-		      auto-complete
+                      auto-complete
+                      auto-complete-c-headers
+                      irony
 		      company
+                      company-irony
 		      go-mode
-		      js2-mode
-                      nodejs-repl
+                      yasnippet
                       exec-path-from-shell
 		      smartparens
 		      monokai-theme

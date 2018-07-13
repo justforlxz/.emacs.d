@@ -1,18 +1,36 @@
-;; init-auto-complete.el
-...
+;; should be loaded after yasnippet
+(require-package 'fuzzy)
+(require-package 'popup)
+(require-package 'auto-complete)
 (require 'auto-complete-config)
 (global-auto-complete-mode t)
-;; 把自定义的dict加到auto-complete的字典中去
 (add-to-list 'ac-dictionary-directories
              (expand-file-name "lisp/custom-dicts" user-emacs-directory))
-;; 按下TAB时首先缩进所在行，然后尝试补全
+
+;; if TAB is pressed, first indent current line, then try to complete
 (setq tab-always-indent 'complete)
-;; 阻止自动触发补全动作
+
+;; prevent auto-complete from automatically expanding
 (setq-default ac-expand-on-auto-complete nil)
 (setq-default ac-auto-start nil)
-;; 用TAB作为手动触发补全动作的快捷键
+;; use TAB to explicitily trigger the auto-complete func
 (ac-set-trigger-key "TAB")
-;; 使用after-load来确保ac-source-yasnippet已经完成加载
+;; (setq-default ac-dwim nil)
+
+
+;; use pos-tip instead of popup
+(require-package 'pos-tip)
+(require 'pos-tip)
+(setq ac-quick-help-prefer-pos-tip t)
+;; use quick-help to show the documents
+;; (setq ac-use-quick-help t)
+;; (setq ac-quick-help-delay 1.0)
+
+;; use fuzzy matching. needs manually triggering.
+(setq ac-fuzzy-enable t)
+
+(setq ac-trigger-commands
+      (cons 'backward-delete-char-untabify ac-trigger-commands))
 (after-load 'init-yasnippet
   (set-default 'ac-sources
              '(ac-source-dictionary
@@ -21,5 +39,8 @@
                ac-source-words-in-all-buffer
                ac-source-functions
                ac-source-yasnippet)))
+
+;; add custom sources
 (require 'init-ac-source)
+
 (provide 'init-auto-complete)
