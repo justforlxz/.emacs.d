@@ -13,6 +13,7 @@
                       irony
                       company-irony
                       company-ycmd
+                      company-jedi
 		      go-mode
                       yasnippet
                       yasnippet-snippets
@@ -21,8 +22,11 @@
 		      monokai-theme
 		      neotree
 		      expand-region
-		      iedit
                       use-package
+                      elpy ;;python
+                      flycheck ;;python
+                      company-jedi ;;python
+                      virtualenvwrapper
 		      ) "Defualt packages")
 
 (setq package-selected-packages my/packages)

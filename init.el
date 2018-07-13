@@ -6,6 +6,8 @@
   (add-to-list 'load-path "~/.emacs.d/lisp/")
   (require 'use-package))
 
+(provide 'init)
+
 (require 'init-packages)
 (require 'init-utils)
 (require 'init-elpa)
@@ -15,7 +17,7 @@
 (require 'init-tab)
 (require 'go-autocomplete)
 (require 'init-irony)
-(provide 'init)
+(require 'init-python)
 
 (setq make-backup-files nil)
 
