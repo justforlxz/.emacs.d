@@ -62,3 +62,9 @@
 (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 (setq dumb-jump-quiet t)
 (setq dumb-jump-prefer-searcher 'ag)
+
+
+;; 显示时间
+(display-time-mode 1) ;; 常显
+(setq display-time-24hr-format t) ;;格式
+(setq display-time-day-and-date t) ;;显示时间、星期、日期

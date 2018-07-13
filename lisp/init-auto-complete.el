@@ -7,7 +7,7 @@
 (add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-clang-20140409.52/")
 (require 'auto-complete-clang)
 ;; 设置不自动启动
-(setq ac-auto-start nil)
+;;(setq ac-auto-start nil)
 ;; 设置响应时间 0.5
 (setq ac-quick-help-delay 0.5)
 ;;(ac-set-trigger-key "TAB")
