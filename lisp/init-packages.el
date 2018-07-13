@@ -11,8 +11,8 @@
                       auto-complete-c-headers
                       dumb-jump
                       irony
-		      company
                       company-irony
+                      company-ycmd
 		      go-mode
                       yasnippet
                       yasnippet-snippets

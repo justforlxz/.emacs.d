@@ -10,14 +10,11 @@
 (require 'init-utils)
 (require 'init-elpa)
 (require 'init-auto-complete)
-;;(require 'init-fonts)
 ;;(require 'init-markdown)
 (require 'init-font)
 (require 'init-tab)
 (require 'go-autocomplete)
-;; start yasnippet with emacs
-(require 'yasnippet)
-
+(require 'init-irony)
 (provide 'init)
 
 (setq make-backup-files nil)
@@ -83,14 +80,3 @@
   (local-set-key (kbd "C-c C-k") 'godoc)))
 (add-hook 'go-mode-hook 'company-mode)(add-hook 'go-mode-hook (lambda ()  (set (make-local-variable 'company-backends) '(company-go))
   (company-mode)))
-
-;; define a function which initializes auto-complete-c-headers and gets called for c/c++ hooks
-(defun my:ac-c-header-init ()
-  (require 'auto-complete-c-headers)
-  (add-to-list 'ac-sources 'ac-source-c-headers)
-  (add-to-list 'achead:include-directories '"/usr/lib/gcc/x86_64-linux-gnu/4.8/include")
-)
-
-;; now let's call this function from c/c++ hooks
-(add-hook 'c++-mode-hook 'my:ac-c-header-init)
-(add-hook 'c-mode-hook 'my:ac-c-header-init)

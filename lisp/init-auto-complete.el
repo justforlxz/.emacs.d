@@ -42,3 +42,7 @@
 ;; ac-source-gtags
 (my-ac-config)
 (ac-config-default)
+(setq ac-ignore-case t)
+
+(require 'yasnippet)
+(yas/global-mode 1)
