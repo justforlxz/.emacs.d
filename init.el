@@ -1,4 +1,19 @@
+(when (>= emacs-major-version 24)
+    (require 'package)
+    (package-initialize)
+    (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+		      ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
+
+;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
+
 (package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
 
 ;; This is only needed once, near the top of the file
 (eval-when-compile

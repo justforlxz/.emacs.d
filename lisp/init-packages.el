@@ -1,10 +1,3 @@
- (when (>= emacs-major-version 24)
-     (require 'package)
-     (package-initialize)
-     (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-			      ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
-
-;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 (require 'cl)
 (defvar my/packages '(
                       auto-complete
@@ -14,14 +7,14 @@
                       company-irony
                       company-ycmd
                       company-jedi
-		      go-mode
+                      go-mode
                       yasnippet
                       yasnippet-snippets
                       exec-path-from-shell
-		      smartparens
-		      monokai-theme
-		      neotree
-		      expand-region
+                      smartparens
+                      monokai-theme
+                      neotree
+                      expand-region
                       use-package
                       elpy ;;python
                       flycheck ;;python
