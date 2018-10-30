@@ -1,22 +1,9 @@
-(provide 'init-python)
-
 (use-package auto-virtualenv
   :ensure t
   :config
   (add-hook 'python-mode-hook 'auto-virtualenv-set-virtualenv)
 )
 
-(use-package elpy
-  :ensure t
-  :init
-  (setq elpy-rpc-backend "jedi")
-  (elpy-enable)
-  :config
-  (add-hook 'python-mode-hook 'elpy-mode)
-  (with-eval-after-load 'elpy
-  (add-hook 'elpy-mode-hook 'elpy-use-ipython))
-  :bind (("M-*" . pop-tag-mark))
-)
 
 (use-package indent-tools
   :ensure t
@@ -78,3 +65,6 @@
   (add-to-list 'company-backends 'company-jedi))
 
 (add-hook 'python-mode-hook 'my/python-mode-hook)
+
+
+(provide 'init-python)
