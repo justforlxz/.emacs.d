@@ -5,8 +5,6 @@
   `(eval-after-load ,feature
      '(progn ,@body)))
 
-(provide 'init-utils)
-
 (setq initial-frame-alist (quote ((fullscreen . maximized))))
 
 (add-hook 'emacs-lisp-mode-hook 'show-paren-mode)
@@ -68,3 +66,5 @@
 (display-time-mode 1) ;; 常显
 (setq display-time-24hr-format t) ;;格式
 (setq display-time-day-and-date t) ;;显示时间、星期、日期
+
+(provide 'init-utils)

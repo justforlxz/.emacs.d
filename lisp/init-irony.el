@@ -1,5 +1,3 @@
-(provide 'init-irony)
-
 ;; c++ headers 补全
 
 ;;; backends for irony-c-header
@@ -41,3 +39,5 @@
 
 (eval-after-load 'company
   '(add-to-list 'company-backends 'company-irony))
+
+(provide 'init-irony)

@@ -9,8 +9,6 @@
                     (interactive)
                     (insert ", ")))
 
-(provide 'init-tab)
-
 ;;设置TAB宽度为4
 (setq default-tab-width 4)
 ;;以下设置缩进
@@ -23,3 +21,5 @@
 (setq c-label-offset -4)
 (setq c-basic-offset 4)
 (global-set-key "\C-m" 'reindent-then-newline-and-indent)
+
+(provide 'init-tab)

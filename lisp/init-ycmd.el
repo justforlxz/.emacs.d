@@ -1,5 +1,3 @@
-(provide 'init-ycmd)
-
 (require 'ycmd)
 (add-hook 'after-init-hook #'global-ycmd-mode)
 
@@ -12,3 +10,5 @@
 
 (require 'company-ycmd)
 (company-ycmd-setup)
+
+(provide 'init-ycmd)

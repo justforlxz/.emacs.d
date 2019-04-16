@@ -1,48 +1,26 @@
-(provide 'init-auto-complete)
+;; init-auto-complete.el
 
-(add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-20170124.1845/")
-(require 'auto-complete)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20170124.1845/dict/")
 (require 'auto-complete-config)
-(add-to-list 'load-path "~/.emacs.d/elpa/auto-complete-clang-20140409.52/")
-(require 'auto-complete-clang)
-;; 设置不自动启动
-;;(setq ac-auto-start nil)
-;; 设置响应时间 0.5
-(setq ac-quick-help-delay 0.5)
-;;(ac-set-trigger-key "TAB")
-;;(define-key ac-mode-map  [(control tab)] 'auto-complete)
-;; 提示快捷键为 M-/
-(define-key ac-mode-map  (kbd "M-/") 'auto-complete)
-(defun my-ac-config ()
-  (setq ac-clang-flags
-        (mapcar(lambda (item)(concat "-I" item))
-               (split-string
-                "
- /usr/include/c++/7
- /usr/include/x86_64-linux-gnu/c++/7
- /usr/include/c++/7/backward
- /usr/lib/gcc/x86_64-linux-gnu/7/include
- /usr/local/include
- /usr/lib/gcc/x86_64-linux-gnu/7/include-fixed
- /usr/include/x86_64-linux-gnu
- /usr/include
-"
-)))
-(setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
-(add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-(add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-(add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
-(add-hook 'css-mode-hook 'ac-css-mode-setup)
-(add-hook 'auto-complete-mode-hook 'ac-common-setup)
-(global-auto-complete-mode t))
-(defun my-ac-cc-mode-setup ()
-  (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
-(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
-;; ac-source-gtags
-(my-ac-config)
-(ac-config-default)
-(setq ac-ignore-case t)
+(global-auto-complete-mode t)
+;; 把自定义的dict加到auto-complete的字典中去
+(add-to-list 'ac-dictionary-directories
+             (expand-file-name "lisp/custom-dicts" user-emacs-directory))
+;; 按下TAB时首先缩进所在行，然后尝试补全
+(setq tab-always-indent 'complete)
+;; 阻止自动触发补全动作
+(setq-default ac-expand-on-auto-complete nil)
+(setq-default ac-auto-start nil)
+;; 用TAB作为手动触发补全动作的快捷键
+(ac-set-trigger-key "TAB")
+;; 使用after-load来确保ac-source-yasnippet已经完成加载
+(after-load 'init-yasnippet
+  (set-default 'ac-sources
+             '(ac-source-dictionary
+               ac-source-words-in-buffer
+               ac-source-words-in-same-mode-buffers
+               ac-source-words-in-all-buffer
+               ac-source-functions
+               ac-source-yasnippet)))
+(require 'init-ac-source)
 
-(require 'yasnippet)
-(yas/global-mode 1)
+(provide 'init-auto-complete)

@@ -39,8 +39,6 @@
 (when (memq window-system '(mac ns))
   (exec-path-from-shell-initialize))
 
-(provide 'init-packages)
-
 (load-theme 'monokai 1)
     (add-to-list 'package-archives
                  '("melpa" . "http://melpa.org/packages/"))
@@ -58,3 +56,5 @@
 					try-expand-line
 					try-complete-lisp-symbol-partially
 					try-complete-lisp-symbol))
+
+(provide 'init-packages)

@@ -27,6 +27,10 @@
   (global-set-key (kbd "C-c y") 'company-yasnippet)
 )
 
+(require-package 'yasnippet)
+(require 'yasnippet)
+(setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+
 ;; enable elpy jedi backend
 (setq elpy-rpc-backend "jedi")
 
