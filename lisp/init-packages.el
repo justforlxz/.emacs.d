@@ -20,6 +20,7 @@
                       flycheck ;;python
                       company-jedi ;;python
                       virtualenvwrapper
+                      dumb-jump ;;跳转
 		      ) "Defualt packages")
 
 (setq package-selected-packages my/packages)
