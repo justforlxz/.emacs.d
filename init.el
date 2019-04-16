@@ -66,6 +66,11 @@
 
 (global-set-key (kbd "<f11>") 'toggle-fullscreen)
 
+(custom-set-variables
+ '(initial-frame-alist (quote ((fullscreen . fullboth)))))
+
+(my-fullscreen)
+
 ;; 显示行号
 (global-linum-mode 1)
 
