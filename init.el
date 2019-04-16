@@ -34,6 +34,12 @@
 (require 'init-irony)
 (require 'init-python)
 (require 'init-golang)
+(require 'init-ede)
+(require 'lk-file-search)
+(require 'init-tabbar)
+(require 'init-themes)
+(require 'init-fonts)
+(require 'init-git)
 
 (setq make-backup-files nil)
 
@@ -76,9 +82,13 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-enabled-themes (quote (sanityinc-solarized-dark)))
+ '(custom-safe-themes
+   (quote
+    ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
  '(package-selected-packages
    (quote
-    (auto-complete-c-headers auto-complete-clang company-go auto-compile go-mode))))
+    (## auto-complete-c-headers auto-complete-clang company-go auto-compile go-mode))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
