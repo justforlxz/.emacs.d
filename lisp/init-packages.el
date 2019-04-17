@@ -4,6 +4,9 @@
                       auto-complete-c-headers
                       dumb-jump
                       irony
+                      irony-eldoc
+                      flycheck-irony
+                      flycheck-ycmd
                       company-irony
                       company-ycmd
                       company-jedi
@@ -64,10 +67,10 @@
 					try-complete-lisp-symbol-partially
 					try-complete-lisp-symbol))
 
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
+;(add-hook 'c++-mode-hook 'irony-mode)
+;(add-hook 'c-mode-hook 'irony-mode)
+;(add-hook 'objc-mode-hook 'irony-mode)
 
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+;(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 
 (provide 'init-packages)

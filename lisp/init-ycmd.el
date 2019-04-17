@@ -1,4 +1,7 @@
 (require 'ycmd)
+
+(set-variable 'ycmd-server-command '("python" "/usr/bin/ycmd"))
+
 (add-hook 'after-init-hook #'global-ycmd-mode)
 
 (defun ycmd-setup-completion-at-point-function ()
@@ -10,5 +13,8 @@
 
 (require 'company-ycmd)
 (company-ycmd-setup)
+
+(require 'flycheck-ycmd)
+(flycheck-ycmd-setup)
 
 (provide 'init-ycmd)

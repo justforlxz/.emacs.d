@@ -6,4 +6,5 @@
 ;;       '((x (font . "文泉驿等宽微米黑 11")) ;; if frame created on x display
 ;;         (nil))) ;; if on term
 
+(set-default-font "Fira Code-11")
 (provide 'init-fonts)

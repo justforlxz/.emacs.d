@@ -33,12 +33,6 @@
 ;;(setq font-lock-support-mode 'lazy-lock-mode)
 (setq font-lock-maximum-decoration t)
 
-
-;; 代码补全
-(add-hook 'c-mode-hook 'company-mode)
-(add-hook 'c++-mode-hook 'company-mode)
-
-
 ;; Enable global company mode
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
@@ -53,18 +47,69 @@
 
 (global-set-key [f1] 'whitespace-newline-mode)
 
-(add-hook 'c++-mode-hook 'irony-mode)
-(add-hook 'c-mode-hook 'irony-mode)
-(add-hook 'objc-mode-hook 'irony-mode)
-
-(add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
 (setq dumb-jump-quiet t)
 (setq dumb-jump-prefer-searcher 'ag)
-
 
 ;; 显示时间
 (display-time-mode 1) ;; 常显
 (setq display-time-24hr-format t) ;;格式
 (setq display-time-day-and-date t) ;;显示时间、星期、日期
+
+(setq make-backup-files nil)
+
+;; show fullscreen
+
+(defun my-fullscreen ()
+  (interactive)
+  (set-frame-parameter nil 'fullscreen 'fullboth) ;this makes the frame go fullscreen
+  (tool-bar-mode -1) ;these 3 lines turn off GUI junk
+  (scroll-bar-mode -1)
+  (menu-bar-mode -1))
+
+(defun my-non-fullscreen ()
+  (interactive)
+  (set-frame-parameter nil 'width 82)
+  (set-frame-parameter nil 'fullscreen 'fullheight)
+  (menu-bar-mode t)) ;I don't turn tool-bar and scroll-bar back on b/c I never want them
+
+(defun toggle-fullscreen ()
+  (interactive)
+  (if (eq (frame-parameter nil 'fullscreen) 'fullboth)  ;tests if already fullscreened
+      (my-non-fullscreen)
+    (my-fullscreen)))
+
+(global-set-key (kbd "<f11>") 'toggle-fullscreen)
+
+(custom-set-variables
+ '(initial-frame-alist (quote ((fullscreen . fullboth)))))
+
+(my-fullscreen)
+
+;; 显示行号
+(global-linum-mode 1)
+
+;; 更改光标的样式（不能生效，解决方案见第二集）
+(setq cursor-type 'bar)
+
+;; 关闭启动帮助画面
+(setq inhibit-splash-screen 1)
+;;(custom-set-variables
+;; ;; custom-set-variables was added by Custom.
+;; ;; If you edit it by hand, you could mess it up, so be careful.
+;; ;; Your init file should contain only one such instance.
+;; ;; If there is more than one, they won't work right.
+;; '(custom-enabled-themes (quote (sanityinc-solarized-dark)))
+;; '(custom-safe-themes
+;;   (quote
+;;    ("4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
+;; '(package-selected-packages
+;;   (quote
+;;    (## auto-complete-c-headers auto-complete-clang company-go auto-compile go-mode))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 (provide 'init-utils)
