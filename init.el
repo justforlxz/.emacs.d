@@ -6,6 +6,8 @@
 
 ;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
 
+(file-directory-p (expand-file-name (concat "~" init-file-user)))
+
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -37,9 +39,11 @@
 (require 'init-ede)
 (require 'lk-file-search)
 (require 'init-tabbar)
-(require 'init-themes)
+;;(require 'init-themes)
 (require 'init-fonts)
 (require 'init-git)
+(require 'init-cedet)
+(require 'init-ecb)
 
 (setq make-backup-files nil)
 

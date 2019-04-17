@@ -21,6 +21,7 @@
                       company-jedi ;;python
                       virtualenvwrapper
                       dumb-jump ;;跳转
+                      all-the-icons
 		      ) "Defualt packages")
 
 (setq package-selected-packages my/packages)
@@ -44,8 +45,13 @@
     (add-to-list 'package-archives
                  '("melpa" . "http://melpa.org/packages/"))
 
+;; neotree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
+
+;; all icon
+(require 'all-the-icons)
 
 (setq hippie-expand-try-function-list '(try-expand-debbrev
 					try-expand-debbrev-all-buffers
