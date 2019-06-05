@@ -1,3 +1,6 @@
 [submodule "ecb"]
 	path = ecb
 	url = https://github.com/ecb-home/ecb.git
+[submodule "ycmd"]
+	path = ycmd
+	url = https://github.com/Valloric/ycmd.git
