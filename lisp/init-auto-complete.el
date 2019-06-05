@@ -23,4 +23,24 @@
                ac-source-yasnippet)))
 (require 'init-ac-source)
 
+(require 'auto-complete-clang)
+
+(setq ac-clang-flags
+      (mapcar (lambda (item)(concat "-I" item))
+              (split-string
+               "
+                /usr/include/c++/7
+                /usr/include/x86_64-linux-gnu/c++/7
+                /usr/include/c++/7/backward
+                /usr/lib/gcc/x86_64-linux-gnu/7/include
+                /usr/local/include
+                /usr/lib/gcc/x86_64-linux-gnu/7/include-fixed
+                /usr/include/x86_64-linux-gnu
+                "
+               )))
+
+(require 'auto-complete-clang)
+
+(require 'auto-complete)
+
 (provide 'init-auto-complete)

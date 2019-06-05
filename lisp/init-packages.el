@@ -25,6 +25,8 @@
                       virtualenvwrapper
                       dumb-jump ;;跳转
                       all-the-icons
+                      rtags ;;cmake-ide depend
+                      cmake-ide
 		      ) "Defualt packages")
 
 (setq package-selected-packages my/packages)

@@ -42,5 +42,7 @@
 (require 'init-cedet)
 (require 'init-ecb)
 ;;(require 'init-ycmd)
+(require 'init-cmake)
+(require 'init-yasnippet)
 
 (provide 'init)
