@@ -41,8 +41,24 @@
 (require 'init-git)
 (require 'init-cedet)
 (require 'init-ecb)
-;;(require 'init-ycmd)
+(require 'init-ycmd)
 (require 'init-cmake)
 (require 'init-yasnippet)
 
 (provide 'init)
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(initial-frame-alist (quote ((fullscreen . fullboth))))
+ '(package-selected-packages
+   (quote
+    (magit auto-complete auto-complete-c-headers dumb-jump irony irony-eldoc flycheck-irony flycheck-ycmd company-irony company-ycmd company-jedi go-mode yasnippet yasnippet-snippets exec-path-from-shell smartparens monokai-theme neotree expand-region use-package elpy flycheck company-jedi virtualenvwrapper dumb-jump all-the-icons rtags cmake-ide))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

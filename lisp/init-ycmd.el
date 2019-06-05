@@ -1,4 +1,5 @@
 (require 'ycmd)
+(add-hook 'c++-mode-hook 'ycmd-mode)
 
 (set-variable 'ycmd-server-command '("python" "/usr/bin/ycmd"))
 
@@ -11,10 +12,17 @@
 
 (add-hook 'ycmd-mode-hook #'ycmd-setup-completion-at-point-function)
 
+;;;; Completion framework
+(require-package 'company-ycmd)
 (require 'company-ycmd)
 (company-ycmd-setup)
 
+;;;; Enable flycheck
+(require-package 'flycheck-ycmd)
 (require 'flycheck-ycmd)
 (flycheck-ycmd-setup)
+
+(when (not (display-graphic-p))
+  (setq flycheck-indication-mode nil))
 
 (provide 'init-ycmd)

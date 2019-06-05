@@ -112,4 +112,16 @@
  ;; If there is more than one, they won't work right.
  )
 
+;;定义在cpp文件和.h文件中切换的函数
+;;;###autoload
+(defun switch-source-file ()
+  (interactive)
+  (setq file-name (buffer-file-name))
+  (if (string-match "//.cpp" file-name)
+      (find-file (replace-regexp-in-string "//.cpp" "/.h" file-name)))
+  (if (string-match "//.h" file-name)
+      (find-file (replace-regexp-in-string "//.h" "/.cpp" file-name))))
+
+(global-set-key [f4] 'switch-source-file)
+
 (provide 'init-utils)
