@@ -27,6 +27,8 @@
                       all-the-icons
                       rtags ;;cmake-ide depend
                       cmake-ide
+                      typescript-mode
+                      tide
 		      ) "Defualt packages")
 
 (setq package-selected-packages my/packages)

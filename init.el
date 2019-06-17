@@ -44,6 +44,7 @@
 (require 'init-ycmd)
 (require 'init-cmake)
 (require 'init-yasnippet)
+(require 'init-typescript)
 
 (provide 'init)
 
