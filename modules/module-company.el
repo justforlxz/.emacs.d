@@ -7,8 +7,8 @@
 ;; This file sets up completion by company and lsp.
 
 ;;; Code:
-(require-packages '(company lsp-mode lsp-ui lsp-ivy go-snippets treemacs lsp-treemacs))
-;; (require-packages '(company lsp-mode lsp-ui ccls lsp-ivy go-snippets treemacs lsp-treemacs))
+;; (require-packages '(company lsp-mode lsp-ui lsp-ivy go-snippets treemacs lsp-treemacs))
+(require-packages '(company lsp-mode lsp-ui ccls lsp-ivy go-snippets treemacs lsp-treemacs))
 
 ;; Enable 'company-fuzzy' if needed
 
