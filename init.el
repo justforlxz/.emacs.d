@@ -1,65 +1,105 @@
-(when (>= emacs-major-version 24)
-    (require 'package)
-    (package-initialize)
-    (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
-		      ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/"))))
+;;; init.el --- Emacs's configuration entry point
+;;
 
-;; 注意 elpa.emacs-china.org 是 Emacs China 中文社区在国内搭建的一个 ELPA 镜像
+;;
 
-(file-directory-p (expand-file-name (concat "~" init-file-user)))
+;;; Commentary:
+;; This file will set up the modules load path and load these special modules.
 
-(package-initialize)
+;;; Code:
+(defvar current-user
+  (getenv "USER"))
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+(message "Emacs startup for %s..." current-user)
 
-(eval-when-compile
-  (require 'use-package))
+;; Version checker
+(when (version< emacs-version "25.1")
+  (error "Require Emacs 15.1 or newer, but you're running %s" emacs-version))
 
-;; This is only needed once, near the top of the file
-(eval-when-compile
-  ;; Following line is not needed if use-package.el is in ~/.emacs.d
-  (add-to-list 'load-path "~/.emacs.d/lisp/")
-  (require 'use-package))
+;; Always load newest byte code
+;; Non-nil means load prefers the newest version of a file.
+(setq load-prefer-newer t)
 
-(require 'init-packages)
-(require 'init-utils)
-(require 'init-elpa)
-(require 'init-auto-complete)
-;;(require 'init-markdown)
-(require 'init-tab)
-(require 'go-autocomplete)
-(require 'init-irony)
-(require 'init-python)
-(require 'init-golang)
-(require 'init-ede)
-(require 'lk-file-search)
-(require 'init-tabbar)
-;;(require 'init-themes)
-(require 'init-fonts)
-(require 'init-git)
-(require 'init-cedet)
-(require 'init-ecb)
-(require 'init-ycmd)
-(require 'init-cmake)
-(require 'init-yasnippet)
-(require 'init-typescript)
+;; Sets up the modules load path and other configuration files.
+(defvar config-dir (file-name-directory load-file-name)
+  "Emacs configuration root dir.")
+(defvar config-core-dir (expand-file-name "core" config-dir)
+  "Emacs core modules dir.")
+(defvar config-modules-dir (expand-file-name "modules" config-dir)
+  "Emacs optional modules dir.")
+(defvar config-personal-dir (expand-file-name "personal" config-dir)
+  "Emacs personal modules dir.")
+(defvar config-savefile-dir (expand-file-name "savefile" config-dir)
+  "Emacs automatically generated files, such as: recently, history etc.")
+(defvar config-modules-file (expand-file-name "loaded-modules.el" config-personal-dir)
+  "This file contains a list of optional modules will be loaded.")
+(defvar config-misc-dir (expand-file-name "misc" config-dir)
+  "Emacs misc dir.")
 
-(provide 'init)
+;; config changes made through the customize UI will be stored here
+(setq custom-file (expand-file-name "custom.el" config-personal-dir))
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(initial-frame-alist (quote ((fullscreen . fullboth))))
- '(package-selected-packages
-   (quote
-    (magit auto-complete auto-complete-c-headers dumb-jump irony irony-eldoc flycheck-irony flycheck-ycmd company-irony company-ycmd company-jedi go-mode yasnippet yasnippet-snippets exec-path-from-shell smartparens monokai-theme neotree expand-region use-package elpy flycheck company-jedi virtualenvwrapper dumb-jump all-the-icons rtags cmake-ide))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(unless (file-exists-p config-savefile-dir)
+  (make-directory config-savefile-dir))
+
+;; add configuration's directories to `load-path'
+(add-to-list 'load-path config-core-dir)
+(add-to-list 'load-path config-modules-dir)
+
+;; reduce the frequency of garbage collection by making it happen on
+;; each 50MB of allocated data (the default is on every 0.76MB)
+(setq gc-cons-threshold 50000000)
+
+;; proxy
+;;(setq url-gateway-method 'socks)
+;;(setq socks-server '("Server" "127.0.0.1" 1080 5))
+
+(message "Loading core modules...")
+(require 'core-packages)
+(require 'core-custom) ;; if custom some variable in personal, please load at the next line
+(require 'core-ui)
+(require 'core-project) ;; must load before core-frontend
+(require 'core-editor)
+(require 'core-env-path)
+(require 'core-org)
+(require 'core-chinese)
+(require 'core-autoinsert)
+(require 'core-tips)
+
+(message "Loading optional modules...")
+(if (file-exists-p config-modules-file)
+    (progn
+      (load config-modules-file))
+  (message "Missing optional modules file %s" config-modules-file)
+  (message "You can get started by copying the example file from sample/loaded-modules/el"))
+
+;; load the personal modules, filter the file 'config-modules-file'
+(when (file-exists-p config-personal-dir)
+  (message "Loading personal modules in %s..." config-personal-dir)
+  (mapc 'load (delete
+               config-modules-file
+               (directory-files config-personal-dir 't "^[^#\.].*\\.el$"))))
+
+;; Must be loaded after 'custom.el'
+(require 'core-frontend)
+(require 'core-terminal)
+(require 'core-window)
+
+(message "Emacs is ready for %s..." current-user)
+
+;; Patch security vulnerability in Emacs versions older than 25.3
+(when (version< emacs-version "25.3")
+  (with-eval-after-load "enriched"
+    (defun enriched-decode-display-prop (start end &optional param)
+      (list start end))))
+
+;; Disable 'C-z'
+;; 'C-s' resume from 'C-z'
+(global-unset-key (kbd "C-z"))
+
+;; enable 'pdf-tools'
+;;(pdf-tools-install)
+
+(eval-after-init
+ ;; greet the use with some useful tip
+ (run-at-time 5 nil 'tip-of-the-day))

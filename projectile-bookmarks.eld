@@ -1,0 +1,1 @@
+("~/Develop/dde-kwin/" "~/.emacs.d/")
